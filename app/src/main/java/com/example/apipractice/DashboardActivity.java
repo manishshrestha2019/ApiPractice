@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class DashboardActivity extends AppCompatActivity {
-    private Button btnSearch, btnViewEmployee, btnAddEmployee;
+    private Button btnSearch, btnViewEmployee, btnAddEmployee,btnUpdateDelete;
 
 
     @Override
@@ -18,6 +18,7 @@ public class DashboardActivity extends AppCompatActivity {
         btnSearch=findViewById(R.id.btnSearch);
         btnViewEmployee=findViewById(R.id.btnViewEmployee);
         btnAddEmployee=findViewById(R.id.btnAddEmployee);
+        btnUpdateDelete=findViewById(R.id.btnUpdateDelete);
 
 
         btnViewEmployee.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +40,13 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(DashboardActivity.this,AddEmployeeActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnUpdateDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashboardActivity.this,UpdateDeleteActivity.class);
                 startActivity(intent);
             }
         });

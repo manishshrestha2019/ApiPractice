@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AddEmployeeActivity"></activity>
+        <activity android:name=".UpdateDeleteActivity"></activity>
+        <activity android:name=".AddEmployeeActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".DashboardActivity">
             <intent-filter>

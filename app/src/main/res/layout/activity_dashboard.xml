@@ -22,5 +22,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Employee"/>
+    <Button
+        android:id="@+id/btnUpdateDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update and Delete Employee"/>
 
 </LinearLayout>
