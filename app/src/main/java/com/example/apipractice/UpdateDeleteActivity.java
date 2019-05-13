@@ -1,11 +1,17 @@
 package com.example.apipractice;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import api.EmployeeAPI;
 import model.Employee;
@@ -42,6 +48,9 @@ public class UpdateDeleteActivity extends AppCompatActivity {
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!inputSearchValidation()){
+                    return;
+                }
                 loadData();
 
             }
@@ -49,14 +58,63 @@ public class UpdateDeleteActivity extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateEmployee();
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                //Yes button clicked
+                                if(!inputValidation()){
+                                    return;
+                                }
+                                updateEmployee();
+                                etName.setText("");
+                                etAge.setText("");
+                                etSalary.setText("");
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                break;
+                        }
+                    }
+                };
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(UpdateDeleteActivity.this);
+                builder.setMessage("Are you sure want to update?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
 
             }
         });
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteEmployee();
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                //Yes button clicked
+                                deleteEmployee();
+                                etId.setText("");
+                                etName.setText("");
+                                etAge.setText("");
+                                etSalary.setText("");
+
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                break;
+                        }
+                    }
+                };
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(UpdateDeleteActivity.this);
+                builder.setMessage("Are you sure want to delete?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+
 
             }
         });
@@ -127,6 +185,32 @@ public class UpdateDeleteActivity extends AppCompatActivity {
 
             }
         });
+    }
+    public boolean inputValidation(){
+        boolean isValid=true;
+        if(TextUtils.isEmpty(etName.getText().toString())){
+            etName.setError("Please Enter Employee Name");
+            etName.requestFocus();
+            isValid=false;
+        }else if(TextUtils.isEmpty(etAge.getText().toString())){
+            etAge.setError("Please Enter Employee Age");
+            etAge.requestFocus();
+            isValid=false;
+        }else if(TextUtils.isEmpty(etSalary.getText().toString())){
+            etSalary.setError("Please Enter Employee Salary");
+            etSalary.requestFocus();
+            isValid=false;
+        }
+        return isValid;
+    }
+    public boolean inputSearchValidation(){
+        boolean isValid=true;
+        if(TextUtils.isEmpty(etId.getText().toString())){
+            etId.setError("Please Enter Employee ID to Search");
+            etId.requestFocus();
+            isValid=false;
+        }
+        return isValid;
     }
 
 

@@ -2,10 +2,13 @@ package com.example.apipractice;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import api.EmployeeAPI;
 import model.Employee;
@@ -34,6 +37,9 @@ public class AddEmployeeActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!inputValidation()){
+                    return;
+                }
                 Register();
 
             }
@@ -57,6 +63,9 @@ public class AddEmployeeActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 Toast.makeText(AddEmployeeActivity.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
+                etName.setText("");
+                etAge.setText("");
+                etSalary.setText("");
             }
 
             @Override
@@ -66,6 +75,23 @@ public class AddEmployeeActivity extends AppCompatActivity {
             }
         });
 
+    }
+    public boolean inputValidation(){
+        boolean isValid=true;
+        if(TextUtils.isEmpty(etName.getText().toString())){
+            etName.setError("Please Enter Employee Name");
+            etName.requestFocus();
+            isValid=false;
+        }else if(TextUtils.isEmpty(etAge.getText().toString())){
+            etAge.setError("Please Enter Employee Age");
+            etAge.requestFocus();
+            isValid=false;
+        }else if(TextUtils.isEmpty(etSalary.getText().toString())){
+            etSalary.setError("Please Enter Employee Salary");
+            etSalary.requestFocus();
+            isValid=false;
+        }
+        return isValid;
     }
 
 }

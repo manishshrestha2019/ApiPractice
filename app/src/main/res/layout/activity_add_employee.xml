@@ -19,13 +19,15 @@
         android:layout_height="wrap_content"
         android:id="@+id/etEmployeeAge"
         android:hint="Enter Employee Age"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:inputType="number"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/etEmployeeSalary"
         android:hint="Enter Employee Salary"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:inputType="numberDecimal"/>
     <Button
         android:id="@+id/btnRegister"
         android:layout_width="match_parent"
